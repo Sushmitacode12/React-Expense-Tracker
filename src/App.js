@@ -1,11 +1,11 @@
 import React from 'react';
-
+import { AuthForm } from './components/Auth/AuthForm';
 
 function App() {
   return (
     <div>
-      
-    </div>
+      <AuthForm />
+    </ div>
   );
 }
 

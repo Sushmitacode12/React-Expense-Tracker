@@ -1,0 +1,36 @@
+.authtop {
+  width: 20%;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+.auth {
+  display: block;
+  border: 2px solid black;
+  background-color: burlywood;
+  line-height: 1.5;
+  text-align: center;
+  margin: auto;
+}
+
+.auth input {
+  width: 50%;
+  height: 1.5rem;
+}
+
+.button {
+  background-color: indigo;
+  color: white;
+  width: 100%;
+  height: 3rem;
+margin-top: 1rem;
+}
+
+.auth button {
+  background-color: blue;
+  color: white;
+  width: 5rem;
+  height: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
