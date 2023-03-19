@@ -1,10 +1,22 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useContext } from "react";
 import classes from "./AuthForm.module.css";
+//import { useHistory } from "react-router-dom";
+import AuthContext from "../Store/auth-context";
 
 export const AuthForm = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  //const history = useHistory();
+  const authCtx = useContext(AuthContext);
+
+  // const history = useHistory();
+
   const emailInputRef = useRef("");
   const passwordInputRef = useRef("");
   const confirmPasswordInputRef = useRef("");
+  
+  const switchAuthHandler = () => {
+    setIsLogin((prevState) => !prevState);
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -13,9 +25,16 @@ export const AuthForm = () => {
     const enteredPassword = passwordInputRef.current.value;
     const enteredConfirmPassword = confirmPasswordInputRef.current.value;
 
-    fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAkkb-XK6VksUmEGNtyg9DigL89lAAN7GM",
-      {
+    if(enteredEmail && enteredPassword === enteredConfirmPassword) {
+      let url;
+      if(isLogin) {
+        url = 
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAkkb-XK6VksUmEGNtyg9DigL89lAAN7GM";
+      } else {
+        url = 
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAkkb-XK6VksUmEGNtyg9DigL89lAAN7GM";
+      }
+      fetch(url, {
         method: "POST",
         body: JSON.stringify({
           email: enteredEmail,
@@ -38,17 +57,27 @@ export const AuthForm = () => {
           });
         }
       })
-      .then((data) => console.log(" User has successfully signed up."))
-      .catch((err) => alert(err.message));
-
-    emailInputRef.current.value = "";
-    passwordInputRef.current.value = "";
-    confirmPasswordInputRef.current.value = "";
-  };
+      .then((data) => {
+        console.log(data)
+        authCtx.login(data.idToken)
+       // history.replace("/home");
+      })
+      .catch((err) => 
+        alert(err.message));
+    } else if (
+      enteredEmail.length === 0 ||
+      enteredPassword.length === 0 ||
+      enteredConfirmPassword.length === 0
+    ) {
+      alert("Enter All Required Details");
+    } else if (enteredEmail && enteredPassword !== enteredConfirmPassword) {
+      alert("Confirm Password Not Matched");
+    }
+  };  
   return (
     <div className={classes.authtop}>
       <div className={classes.auth}>
-        <h2>Sign Up</h2>
+        <h2>{isLogin ? "Login" : "Sign Up"}</h2>
         <div>
           <label>Email</label>
         </div>
@@ -80,11 +109,15 @@ export const AuthForm = () => {
           required
         />
         <div>
-          <button onClick={submitHandler}>Sign Up</button>
+          <button onClick={submitHandler}>{isLogin ? "Login" : "Sign Up"}</button>
         </div>
       </div>
       <div>
-        <button className={classes.button}>Have an account? Login</button>
+        <button className={classes.button} onClick={switchAuthHandler}>
+          {isLogin 
+            ? "Don't Have an account ? Sign Up" 
+            : "Have an account? Login"}
+        </button>
       </div>
     </div>
   );
