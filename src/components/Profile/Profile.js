@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 import AuthContext from '../Store/auth-context'
 import classes from "./Profile.module.css";
 const Profile = () => {
@@ -6,6 +6,36 @@ const Profile = () => {
 
     const nameInputRef = useRef("");
     const urlInputRef = useRef("");
+
+    useEffect(() => {
+      fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyAkkb-XK6VksUmEGNtyg9DigL89lAAN7GM",
+        {
+          method: "POST",
+          body: JSON.stringify({
+          idToken: authCtx.token,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            return res.json().then((data) => {
+              let errMsg = "Authentication Failed";
+              throw new Error(errMsg);
+            });
+          }
+        })
+        .then((data) => {
+          nameInputRef.current.value = data.users[0].displayName;
+          urlInputRef.current.value = data.users[0].photoUrl;
+        })
+        .catch((err) => alert(err.message));
+    }, []);
 
     const updateHandler = (e) => {
         e.preventDefault();
@@ -44,6 +74,7 @@ fetch(
       })
       .catch((err) => alert(err.message));
     };
+
   return (
     <div className={classes.profile}>
       <div className={classes.contact}>

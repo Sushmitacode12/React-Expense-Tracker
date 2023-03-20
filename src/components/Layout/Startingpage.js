@@ -4,6 +4,7 @@ import classes from "./StartingPage.module.css";
 
 export const StartingPage = () => {
   const history = useHistory();
+  
   const profileHandler = () => {
   history.replace("/profile");
   };
