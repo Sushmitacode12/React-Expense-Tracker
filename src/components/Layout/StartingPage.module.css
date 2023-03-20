@@ -14,3 +14,14 @@ display: flex;
   border: none;
   background-color: rgb(240, 220, 194);
 }
+.btn {
+  width: 20%;
+  margin: auto;
+  margin-top: 5rem;
+}
+.btn button {
+  width: 10rem;
+  height: 2rem;
+  font-weight: bold;
+  background-color: aqua;
+}
