@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import AuthContext from '../Store/auth-context';
 import classes from "./MainNavigation.module.css";
 

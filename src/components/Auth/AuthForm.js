@@ -1,14 +1,13 @@
 import React, { useRef, useState, useContext } from "react";
 import classes from "./AuthForm.module.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import AuthContext from "../Store/auth-context";
 
 export const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
-  
-  const authCtx = useContext(AuthContext);
+  const history = useHistory();
 
-   const history = useHistory();
+  const authCtx = useContext(AuthContext);
 
   const emailInputRef = useRef("");
   const passwordInputRef = useRef("");
@@ -58,8 +57,8 @@ export const AuthForm = () => {
         }
       })
       .then((data) => {
-        console.log(data)
-        authCtx.login(data.idToken)
+        console.log(data);
+        authCtx.login(data.idToken);
         history.replace("/home");
       })
       .catch((err) => 
@@ -109,9 +108,16 @@ export const AuthForm = () => {
           required
         />
         <div>
-          <button onClick={submitHandler}>{isLogin ? "Login" : "Sign Up"}</button>
+          <button onClick={submitHandler}>
+            {isLogin ? "Login" : "Sign Up"}
+            </button>
         </div>
       </div>
+      <div>
+          {isLogin ? (
+            <NavLink to="/forgotpassword">Forgot Password</NavLink>
+          ) : null}
+        </div>
       <div>
         <button className={classes.button} onClick={switchAuthHandler}>
           {isLogin 
