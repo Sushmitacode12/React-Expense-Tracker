@@ -10,6 +10,7 @@ import { ForgotPassword } from './components/Pages/ForgotPassword';
 function App() {
   const authCtx = useContext(AuthContext);
   const [token, setToken] = useState(false);
+  const [expenses, setExpenses] = useState([]);
 
   const userIsLoggedIn = !!token;
 
@@ -32,8 +33,9 @@ function App() {
 
   return (
     <AuthContext.Provider value={contextValue}>
+      <ExpenseContext.Provider value={{ expenses, setExpenses }}>
       <Layout>
-      <Switch>
+        <Switch>
           <Route path="/home" exact>
             <Home />
           </Route>
@@ -46,8 +48,9 @@ function App() {
             </Route>
           )}
           <AuthForm />
-          </Switch>
+        </Switch>
       </Layout> 
+      </ExpenseContext.Provider>
     </ AuthContext.Provider>
   );
 }

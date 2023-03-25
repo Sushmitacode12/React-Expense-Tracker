@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router";
 import AuthContext from "../Store/auth-context";
 import classes from "./StartingPage.module.css";
-
+import { Screen } from"../features/Screen";
 export const StartingPage = () => {
   const authCtx = useContext(AuthContext);
   const history = useHistory();
@@ -51,6 +51,7 @@ export const StartingPage = () => {
     <div className={classes.btn}>
       <button onClick={verifyHandler}>VERIFY EMAIL ID</button>
     </div>
+    <Screen />
   </div>
   );
 };
