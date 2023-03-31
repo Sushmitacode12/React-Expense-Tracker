@@ -9,7 +9,7 @@ const Profile = () => {
 
     useEffect(() => {
       fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyAkkb-XK6VksUmEGNtyg9DigL89lAAN7GM",
+        "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDNVxXpsDegs-5H2vmDbmQSr_ngPiYwQwo",
         {
           method: "POST",
           body: JSON.stringify({
@@ -45,7 +45,7 @@ const Profile = () => {
         console.log(authCtx.token);
 
 fetch(
-    "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAkkb-XK6VksUmEGNtyg9DigL89lAAN7GM",
+    "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDNVxXpsDegs-5H2vmDbmQSr_ngPiYwQwo",
     {
         method: "POST",
         body: JSON.stringify({

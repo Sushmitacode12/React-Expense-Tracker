@@ -10,7 +10,7 @@ export const StartingPage = () => {
 
   const verifyHandler = () => {
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyAkkb-XK6VksUmEGNtyg9DigL89lAAN7GM",
+      "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDNVxXpsDegs-5H2vmDbmQSr_ngPiYwQwo",
       {
         method: "POST",
         body: JSON.stringify({

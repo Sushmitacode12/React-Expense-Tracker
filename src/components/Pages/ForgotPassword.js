@@ -12,7 +12,7 @@ export const ForgotPassword = () => {
     const enteredLink = emailRef.current.value;
     setIsLoading(true);
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBlvwm2UFysqlxp549MzHN_mTVXIn57d7s",
+      "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDNVxXpsDegs-5H2vmDbmQSr_ngPiYwQwo",
       {
         method: "POST",
         body: JSON.stringify({
