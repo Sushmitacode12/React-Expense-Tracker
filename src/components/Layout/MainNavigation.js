@@ -5,13 +5,13 @@ import AuthContext from '../Store/auth-context';
 import classes from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
-  // const history = useHistory();
+ // const history = useHistory();
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
 
   const logoutHandler = () => {
     authCtx.logout();
-    // history.replace("/");
+     //history.replace("/");
   };
 
   return (
