@@ -3,9 +3,10 @@ import { useHistory } from "react-router";
 import AuthContext from "../Store/auth-context";
 import classes from "./StartingPage.module.css";
 import { Screen } from"../features/Screen";
+
 export const StartingPage = () => {
   const authCtx = useContext(AuthContext);
-  const history = useHistory();
+  // const history = useHistory();
 
   const verifyHandler = () => {
     fetch(
@@ -36,7 +37,7 @@ export const StartingPage = () => {
   };
   
   const profileHandler = () => {
-  history.replace("/profile");
+  // history.replace("/profile");
   };
 
   return (

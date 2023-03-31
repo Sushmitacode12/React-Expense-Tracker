@@ -8,4 +8,10 @@
     margin-top: 2rem;
     background-color: greenyellow;
     border-radius: 1rem;
+    align-items: center;
+  }
+
+  .card button{
+    background-color: aquamarine;
+    padding: 5px;
   }

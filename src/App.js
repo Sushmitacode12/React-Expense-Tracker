@@ -6,6 +6,7 @@ import Layout from './components/Layout/Layout';
 import AuthContext from './components/Store/auth-context';
 import Profile from './components/Profile/Profile';
 import { ForgotPassword } from './components/Pages/ForgotPassword';
+import { ExpenseContext } from './components/Store/ExpenseContext';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -39,7 +40,7 @@ function App() {
           <Route path="/home" exact>
             <Home />
           </Route>
-          <Route path="/profile" exact>
+           <Route path="/profile" exact>
             <Profile />
           </Route>
           {!authCtx.isLoggedIn && (
@@ -47,7 +48,7 @@ function App() {
               <ForgotPassword />
             </Route>
           )}
-          <AuthForm />
+         <AuthForm /> 
         </Switch>
       </Layout> 
       </ExpenseContext.Provider>

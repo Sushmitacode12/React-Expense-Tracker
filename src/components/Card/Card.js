@@ -7,6 +7,12 @@ export const Card = (props) => {
       <div>EXPENSE: {props.expense}</div>
       <div>DESCRIPTION: {props.description}</div>
       <div>CATEGORY: {props.category}</div>
+      <div>
+        <button onClick={() => props.removeFormHandler(props.id)}>
+          Delete
+        </button>
+        <button onClick={() => props.editFormHandler(props.id)}>Edit</button>
+      </div>
     </div>
   );
 };

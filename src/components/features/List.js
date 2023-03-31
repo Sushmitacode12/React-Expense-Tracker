@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ExpenseContext } from "../store/ExpenseContext";
+import { ExpenseContext } from "../Store/ExpenseContext";
 import { Card } from "../Card/Card";
 
 export const List = () => {
@@ -17,4 +17,4 @@ export const List = () => {
       ))}
     </div>
   );
-};
+}
