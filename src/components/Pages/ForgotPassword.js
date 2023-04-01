@@ -1,42 +1,24 @@
 import React, { useRef, useState } from "react";
 import classes from "./ForgotPassword.module.css";
 import { RotatingLines } from "react-loader-spinner";
+import { verifyPassword } from "../ReduxStore/AuthSlice";
+import { useDispatch } from "react-redux";
 
 export const ForgotPassword = () => {
   const emailRef = useRef("");
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const linkHandler = (e) => {
     e.preventDefault();
 
     const enteredLink = emailRef.current.value;
     setIsLoading(true);
-    fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDNVxXpsDegs-5H2vmDbmQSr_ngPiYwQwo",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          requestType: "PASSWORD_RESET",
-          email: enteredLink,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((res) => {
-        setIsLoading(false);
-        if (res.ok) {
-          return res.json();
-        } else {
-          return res.json().then((data) => {
-            let errMes = "Authentication Failed";
-            throw new Error(errMes);
-          });
-        }
-      })
-      .then((data) => console.log(data))
-      .catch((err) => alert(err.message));
+    
+    dispatch(
+      verifyPassword({ requestType: "PASSWORD_RESET", email: enteredLink })
+    );
+    setIsLoading(false);
   };
 
   return (

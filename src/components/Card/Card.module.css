@@ -13,5 +13,7 @@
 
   .card button{
     background-color: aquamarine;
-    padding: 5px;
+    color: black;
+    width: 3.5rem;
+    height: 1.5rem;
   }

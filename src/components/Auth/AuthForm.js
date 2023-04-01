@@ -1,13 +1,22 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import classes from "./AuthForm.module.css";
 import { useHistory, NavLink } from "react-router-dom";
-import AuthContext from "../Store/auth-context";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUsers } from "../ReduxStore/AuthSlice";
 
 export const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
    //const history = useHistory();
 
-  const authCtx = useContext(AuthContext);
+  const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (auth.token) {
+      //history.replace("/home");
+    }
+  }, [auth.token]);
+
+  const dispatch = useDispatch();
 
   const emailInputRef = useRef("");
   const passwordInputRef = useRef("");
@@ -24,8 +33,9 @@ export const AuthForm = () => {
     const enteredPassword = passwordInputRef.current.value;
     const enteredConfirmPassword = confirmPasswordInputRef.current.value;
 
+    let url;
     if(enteredEmail && enteredPassword === enteredConfirmPassword) {
-      let url;
+      
       if(isLogin) {
         url = 
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDNVxXpsDegs-5H2vmDbmQSr_ngPiYwQwo";
@@ -33,36 +43,7 @@ export const AuthForm = () => {
         url = 
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDNVxXpsDegs-5H2vmDbmQSr_ngPiYwQwo";
       }
-      fetch(url, {
-        method: "POST",
-        body: JSON.stringify({
-          email: enteredEmail,
-          password: enteredPassword,
-          confirmPassword: enteredConfirmPassword,
-          returnSecureToken: true,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return res.json().then((data) => {
-            let errorMessage = "Authentication Failed";
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        console.log(data);
-        authCtx.login(data.idToken);
-         //history.replace("/home");
-      })
-      .catch((err) => 
-        alert(err.message));
+      dispatch(loginUsers({ url, enteredEmail, enteredPassword }));  
     } else if (
       enteredEmail.length === 0 ||
       enteredPassword.length === 0 ||
