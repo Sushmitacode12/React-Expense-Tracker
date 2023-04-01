@@ -8,6 +8,8 @@ const Profile = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  const isDark = useSelector((state) => state.theme.isDark);
+
     const nameInputRef = useRef("");
     const urlInputRef = useRef("");
 
@@ -36,7 +38,7 @@ const Profile = () => {
     };
 
   return (
-    <div className={classes.profile}>
+    <div className={isDark ? classes.profileDark : classes.profileLight}>
       <div className={classes.contact}>
         <div>Contact Details</div>
         <button>Cancel</button>

@@ -1,8 +1,16 @@
-.profile {
+.profileLight {
     width: 50%;
     margin: auto;
     margin-top: 5rem;
     border: 2px solid black;
+  }
+
+  .profileDark {
+    width: 50%;
+    margin: auto;
+    margin-top: 5rem;
+    border: 2px solid red;
+    background-color: white;
   }
   
   .contact {
